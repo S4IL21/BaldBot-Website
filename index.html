@@ -5,9 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#111318">
   <meta name="description" content="BaldBot is the fair Discord idle tycoon where communities build hair empires, battle weekly bosses, and collect seasonal cosmetics.">
+  <link rel="canonical" href="https://baldbot.is-a.bot/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://baldbot.is-a.bot/">
   <meta property="og:title" content="BaldBot - Build the baldest empire">
   <meta property="og:description" content="A fair, competitive Discord idle tycoon by Tatom.">
-  <meta property="og:image" content="https://cdn.discordapp.com/avatars/1407055827487031336/92a58fbe74e87e377262bad29589e28b.png?size=1024">
+  <meta property="og:image" content="https://cdn.discordapp.com/avatars/1407055827487031336/92a58fbe74e87e377262bad29589e28b.png?size=256">
+  <meta property="og:image:width" content="232">
+  <meta property="og:image:height" content="232">
+  <meta property="og:image:alt" content="BaldBot, a smiling blue bald character">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="BaldBot - Build the baldest empire">
+  <meta name="twitter:description" content="A fair, competitive Discord idle tycoon by Tatom.">
+  <meta name="twitter:image" content="https://cdn.discordapp.com/avatars/1407055827487031336/92a58fbe74e87e377262bad29589e28b.png?size=256">
   <title>BaldBot - The Discord Hair Empire</title>
   <link rel="icon" href="https://cdn.discordapp.com/avatars/1407055827487031336/92a58fbe74e87e377262bad29589e28b.png?size=128">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +28,7 @@
 <body>
   <div class="noise" aria-hidden="true"></div>
   <header class="nav-shell">
-    <a class="brand" href="#top" aria-label="BaldBot home">
+    <a class="brand" href="#top" aria-label="BaldBot V2 home">
       <img src="https://cdn.discordapp.com/avatars/1407055827487031336/92a58fbe74e87e377262bad29589e28b.png?size=128" alt="BaldBot avatar">
       <span>BALDBOT</span>
       <small>V2</small>
@@ -60,7 +70,7 @@
           <div class="console-balance"><small>HAIR RESERVES</small><strong>24,820</strong><span>+12.4% TODAY</span></div>
         </div>
         <div class="console-chart" aria-hidden="true">
-          <span style="height: 24%"></span><span style="height: 39%"></span><span style="height: 34%"></span><span style="height: 55%"></span><span style="height: 48%"></span><span style="height: 70%"></span><span style="height: 63%"></span><span style="height: 91%"></span>
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
         </div>
         <div class="console-footer">
           <div><small>PRODUCTION</small><strong>+2.4K/min</strong></div>
@@ -70,7 +80,7 @@
       </div>
     </section>
 
-    <div class="ticker" aria-label="BaldBot features">
+    <div class="ticker" aria-hidden="true">
       <div class="ticker-track">
         <span>PASSIVE GROWTH</span><b>✦</b><span>GUILD BOSSES</span><b>✦</b><span>SEASONAL LOOT</span><b>✦</b><span>FAIR ECONOMY</span><b>✦</b><span>PASSIVE GROWTH</span><b>✦</b><span>GUILD BOSSES</span><b>✦</b><span>SEASONAL LOOT</span><b>✦</b><span>FAIR ECONOMY</span><b>✦</b>
       </div>
@@ -111,10 +121,10 @@
         <h2>Everything starts<br>with a <em>slash.</em></h2>
         <p>Built for Discord with clear command groups, private responses where they matter, and interactive controls everywhere they help.</p>
         <div class="command-tabs" role="tablist" aria-label="Command categories">
-          <button class="command-tab active" type="button" role="tab" aria-selected="true" data-command="dashboard">Dashboard</button>
-          <button class="command-tab" type="button" role="tab" aria-selected="false" data-command="business">Business</button>
-          <button class="command-tab" type="button" role="tab" aria-selected="false" data-command="event">Events</button>
-          <button class="command-tab" type="button" role="tab" aria-selected="false" data-command="season">Seasons</button>
+          <button class="command-tab active" type="button" role="tab" id="tab-dashboard" aria-selected="true" aria-controls="demo-panel" tabindex="0" data-command="dashboard">Dashboard</button>
+          <button class="command-tab" type="button" role="tab" id="tab-business" aria-selected="false" aria-controls="demo-panel" tabindex="-1" data-command="business">Business</button>
+          <button class="command-tab" type="button" role="tab" id="tab-event" aria-selected="false" aria-controls="demo-panel" tabindex="-1" data-command="event">Events</button>
+          <button class="command-tab" type="button" role="tab" id="tab-season" aria-selected="false" aria-controls="demo-panel" tabindex="-1" data-command="season">Seasons</button>
         </div>
       </div>
       <div class="discord-window reveal" data-delay="1">
@@ -123,7 +133,7 @@
           <div><strong>bald-headquarters</strong><span># bot-zone</span></div>
           <i></i><i></i><i></i>
         </div>
-        <div class="chat-body" aria-live="polite">
+        <div class="chat-body" id="demo-panel" role="tabpanel" aria-labelledby="tab-dashboard" aria-live="polite" tabindex="0">
           <div class="slash-entry"><span class="slash-command">/play dashboard</span><span class="slash-user">@you</span></div>
           <div class="bot-message">
             <img src="https://cdn.discordapp.com/avatars/1407055827487031336/92a58fbe74e87e377262bad29589e28b.png?size=128" alt="">
@@ -138,7 +148,7 @@
                   <div><span>PRODUCTION</span><strong>2.4K/min</strong></div>
                   <div><span>ENERGY</span><strong>80 / 100</strong></div>
                 </div>
-                <div class="progress"><span style="width: 68%"></span></div>
+                <div class="progress"><span></span></div>
                 <p id="demo-detail">Your Follicle Forge is carrying the operation.</p>
               </div>
             </div>

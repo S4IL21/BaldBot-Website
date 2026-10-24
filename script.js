@@ -3,16 +3,25 @@ document.body.classList.add("js");
 const menuButton = document.querySelector(".menu-button");
 const navigation = document.querySelector("#site-nav");
 
+function closeMenu() {
+  navigation.classList.remove("open");
+  menuButton.setAttribute("aria-expanded", "false");
+}
+
 menuButton.addEventListener("click", () => {
   const open = navigation.classList.toggle("open");
   menuButton.setAttribute("aria-expanded", String(open));
 });
 
 navigation.querySelectorAll("a").forEach((link) => {
-  link.addEventListener("click", () => {
-    navigation.classList.remove("open");
-    menuButton.setAttribute("aria-expanded", "false");
-  });
+  link.addEventListener("click", closeMenu);
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && navigation.classList.contains("open")) {
+    closeMenu();
+    menuButton.focus();
+  }
 });
 
 const demos = {
@@ -50,29 +59,46 @@ const commandLabel = document.querySelector(".slash-command");
 const demoTitle = document.querySelector("#demo-title");
 const demoStats = document.querySelector("#demo-stats");
 const demoDetail = document.querySelector("#demo-detail");
+const demoPanel = document.querySelector("#demo-panel");
 const progress = document.querySelector(".progress span");
+const tabs = Array.from(document.querySelectorAll(".command-tab"));
 
-document.querySelectorAll(".command-tab").forEach((button) => {
-  button.addEventListener("click", () => {
-    const demo = demos[button.dataset.command];
-    document.querySelectorAll(".command-tab").forEach((tab) => {
-      const selected = tab === button;
-      tab.classList.toggle("active", selected);
-      tab.setAttribute("aria-selected", String(selected));
-    });
-    commandLabel.textContent = demo.command;
-    demoTitle.textContent = demo.title;
-    demoStats.replaceChildren(...demo.stats.map(([label, value]) => {
-      const container = document.createElement("div");
-      const name = document.createElement("span");
-      const amount = document.createElement("strong");
-      name.textContent = label;
-      amount.textContent = value;
-      container.append(name, amount);
-      return container;
-    }));
-    demoDetail.textContent = demo.detail;
-    progress.style.width = demo.progress;
+function activateTab(tab, moveFocus) {
+  const demo = demos[tab.dataset.command];
+  tabs.forEach((other) => {
+    const selected = other === tab;
+    other.classList.toggle("active", selected);
+    other.setAttribute("aria-selected", String(selected));
+    other.tabIndex = selected ? 0 : -1;
+  });
+  demoPanel.setAttribute("aria-labelledby", tab.id);
+  commandLabel.textContent = demo.command;
+  demoTitle.textContent = demo.title;
+  demoStats.replaceChildren(...demo.stats.map(([label, value]) => {
+    const container = document.createElement("div");
+    const name = document.createElement("span");
+    const amount = document.createElement("strong");
+    name.textContent = label;
+    amount.textContent = value;
+    container.append(name, amount);
+    return container;
+  }));
+  demoDetail.textContent = demo.detail;
+  progress.style.width = demo.progress;
+  if (moveFocus) {
+    tab.focus();
+  }
+}
+
+tabs.forEach((tab, index) => {
+  tab.addEventListener("click", () => activateTab(tab, false));
+  tab.addEventListener("keydown", (event) => {
+    const targets = { ArrowRight: index + 1, ArrowLeft: index - 1, Home: 0, End: tabs.length - 1 };
+    if (!(event.key in targets)) {
+      return;
+    }
+    event.preventDefault();
+    activateTab(tabs[(targets[event.key] + tabs.length) % tabs.length], true);
   });
 });
 
